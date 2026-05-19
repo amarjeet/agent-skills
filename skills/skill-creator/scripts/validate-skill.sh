@@ -8,8 +8,8 @@
 #   validate-skill.sh <skill-name-or-path> [--strict]
 #
 # Examples:
-#   .skills/skill-creator/scripts/validate-skill.sh my-skill
-#   .skills/skill-creator/scripts/validate-skill.sh .skills/my-skill --strict
+#   skills/skill-creator/scripts/validate-skill.sh my-skill
+#   skills/skill-creator/scripts/validate-skill.sh skills/my-skill --strict
 
 set -euo pipefail
 

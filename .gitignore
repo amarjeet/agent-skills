@@ -197,6 +197,9 @@ eggs/
 .eggs/
 lib/
 lib64/
+# Skill-creator helper bash lib lives here; do not ignore.
+!skills/**/scripts/lib/
+!skills/**/scripts/lib/**
 parts/
 sdist/
 var/

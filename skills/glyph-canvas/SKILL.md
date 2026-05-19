@@ -26,7 +26,7 @@ The three references are not equal in cost. `Drawing Essentials.md` is small and
 2. If canvas dimensions are unstated and the drawing is non-trivial, ask the user for max width and height before composing.
 3. Read `references/Drawing Essentials.md`.
 4. Apply the reference loading policy. Read `references/Box Art.md` and/or `references/Block Elements.md` only if their domain is involved.
-5. Compose on a single-cell-width grid. After composing, normalize every row with `python3 .skills/glyph-canvas/scripts/glyph.py pad` (pipe the draft on stdin) instead of eyeballing column widths.
+5. Compose on a single-cell-width grid. After composing, normalize every row with `python3 skills/glyph-canvas/scripts/glyph.py pad` (pipe the draft on stdin) instead of eyeballing column widths.
 6. Validate before emitting. Run `glyph.py check` on the canvas to catch ragged rows, tabs, ANSI escapes, or control characters; fix any reported issues. For canvases with user-specified bounds, also run `glyph.py fit MAX_W MAX_H` and address any overflow before emitting.
 7. Emit the drawing inside a fenced code block with no language tag (raw fences) so renderers preserve monospaced spacing.
 8. Below the block, briefly note any glyph used that requires a broad-coverage font, or any deliberate stylistic choice (e.g. half-block shading used to fake a gradient).
@@ -38,7 +38,7 @@ A stdlib-only Python 3 helper at `scripts/glyph.py` provides deterministic primi
 Invocation pattern:
 
 ```
-python3 .skills/glyph-canvas/scripts/glyph.py <subcommand> [args]
+python3 skills/glyph-canvas/scripts/glyph.py <subcommand> [args]
 ```
 
 All subcommands accept text via a positional argument or stdin (use `-` to be explicit). Run `glyph.py <sub> --help` for the full argument list of any subcommand.
@@ -98,7 +98,7 @@ Only `Drawing Essentials.md` was needed; `Box Art.md` and `Block Elements.md` we
 Run validation from anywhere:
 
 ```bash
-.skills/skill-creator/scripts/validate-skill.sh glyph-canvas
-.skills/skill-creator/scripts/validate-skill.sh glyph-canvas --strict
-python3 .skills/glyph-canvas/scripts/glyph.py selftest
+skills/skill-creator/scripts/validate-skill.sh glyph-canvas
+skills/skill-creator/scripts/validate-skill.sh glyph-canvas --strict
+python3 skills/glyph-canvas/scripts/glyph.py selftest
 ```

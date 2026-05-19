@@ -7,7 +7,7 @@ description: "End-to-end system for creating, updating, and validating agent ski
 
 ## Overview
 
-End-to-end authoring system for agent skills: gate the request, scaffold under `.skills/`, write SKILL.md, validate, and confirm symlink discovery.
+End-to-end authoring system for agent skills: gate the request, scaffold under `skills/`, write SKILL.md, validate, and confirm symlink discovery.
 
 ## Instructions
 
@@ -17,14 +17,14 @@ Follow every phase in order unless a skip condition applies.
 
 ```
 <repo-root>/
-├── .skills/                    # canonical storage — write skills HERE
+├── skills/                    # canonical storage — write skills HERE
 │   ├── skill-creator/
 │   └── <skill-name>/
-├── .cursor/skills -> ../.skills   # symlink — never write here
-└── .claude/skills -> ../.skills   # symlink — never write here
+├── .cursor/skills -> ../skills   # symlink — never write here
+└── .claude/skills -> ../skills   # symlink — never write here
 ```
 
-Agents discover skills via the symlinks, but **all files must be created under `.skills/`**.
+Agents discover skills via the symlinks, but **all files must be created under `skills/`**.
 
 ### Script Invocation (Critical)
 
@@ -39,9 +39,9 @@ Bundled scripts resolve paths from **their own location**, not the shell's curre
 Always invoke with the repo-relative path:
 
 ```bash
-.skills/skill-creator/scripts/init-skill.sh <skill-name>
-.skills/skill-creator/scripts/validate-skill.sh <skill-name>
-.skills/skill-creator/scripts/validate-skill.sh <skill-name> --strict
+skills/skill-creator/scripts/init-skill.sh <skill-name>
+skills/skill-creator/scripts/validate-skill.sh <skill-name>
+skills/skill-creator/scripts/validate-skill.sh <skill-name> --strict
 ```
 
 **Never** pass `.cursor/skills` or `.claude/skills` as an output directory. `init-skill.sh` refuses paths outside the canonical skills root.
@@ -84,18 +84,18 @@ Map tasks to resources:
 - **references/** — long docs loaded on demand (>100 lines → add TOC)
 - **assets/** — templates/files copied or modified, not read into context
 
-Confirm the skill name is kebab-case, descriptive, and unique under `.skills/`.
+Confirm the skill name is kebab-case, descriptive, and unique under `skills/`.
 
 ### Phase 3: Scaffold
 
 Run init from anywhere:
 
 ```bash
-.skills/skill-creator/scripts/init-skill.sh <skill-name> --profile minimal
-.skills/skill-creator/scripts/init-skill.sh <skill-name> --profile full --resources scripts,references
+skills/skill-creator/scripts/init-skill.sh <skill-name> --profile minimal
+skills/skill-creator/scripts/init-skill.sh <skill-name> --profile full --resources scripts,references
 ```
 
-Verify output lands in `.skills/<skill-name>/`, not a symlink path.
+Verify output lands in `skills/<skill-name>/`, not a symlink path.
 
 ### Phase 4: Frontmatter
 
@@ -138,8 +138,8 @@ Writing rules:
 ### Phase 7: Validate & Iterate
 
 ```bash
-.skills/skill-creator/scripts/validate-skill.sh <skill-name>
-.skills/skill-creator/scripts/validate-skill.sh <skill-name> --strict
+skills/skill-creator/scripts/validate-skill.sh <skill-name>
+skills/skill-creator/scripts/validate-skill.sh <skill-name> --strict
 ```
 
 Use `--strict` before marking a skill production-ready. It fails on: missing trigger phrases, TODO leftovers in body, missing Overview/Instructions headings.
@@ -158,7 +158,7 @@ ls .claude/skills/<skill-name>/SKILL.md
 - [ ] Phase 0 gate passed (or user acknowledged test/demo exception)
 - [ ] Requirements captured or elicitation skipped with documented spec
 - [ ] Profile chosen (minimal vs full)
-- [ ] `init-skill.sh` run; skill created under `.skills/`, not symlink dirs
+- [ ] `init-skill.sh` run; skill created under `skills/`, not symlink dirs
 - [ ] Frontmatter valid; `name` matches directory
 - [ ] All TODO placeholders replaced
 - [ ] Resources built and tested (full profile)
@@ -169,7 +169,7 @@ ls .claude/skills/<skill-name>/SKILL.md
 
 | Mistake | Fix |
 |---------|-----|
-| Writing to `.cursor/skills/` | Use `init-skill.sh`; it targets `.skills/` automatically |
+| Writing to `.cursor/skills/` | Use `init-skill.sh`; it targets `skills/` automatically |
 | Relying on CWD | Scripts self-locate; invoke by repo-relative path |
 | Name/dir mismatch | Directory must equal frontmatter `name` |
 | Unquoted description colons | Wrap description in double quotes |

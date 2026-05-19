@@ -9,9 +9,9 @@
 #   init-skill.sh <skill-name> [--resources scripts,references,assets] [--profile minimal|full]
 #
 # Examples:
-#   .skills/skill-creator/scripts/init-skill.sh my-skill
-#   .skills/skill-creator/scripts/init-skill.sh api-helper --resources scripts,references
-#   .skills/skill-creator/scripts/init-skill.sh smoke-test --profile minimal
+#   skills/skill-creator/scripts/init-skill.sh my-skill
+#   skills/skill-creator/scripts/init-skill.sh api-helper --resources scripts,references
+#   skills/skill-creator/scripts/init-skill.sh smoke-test --profile minimal
 
 set -euo pipefail
 
@@ -120,7 +120,7 @@ Response: TODO expected behavior.
 Run validation from anywhere:
 
 \`\`\`bash
-.skills/skill-creator/scripts/validate-skill.sh $NAME
+skills/skill-creator/scripts/validate-skill.sh $NAME
 \`\`\`
 TEMPLATE
 fi
@@ -149,4 +149,4 @@ echo "Next steps:"
 echo "  1. Edit $SKILL_DIR/SKILL.md — replace all TODO placeholders"
 echo "  2. Add resources to scripts/, references/, assets/ as needed"
 echo "  3. Validate:"
-echo "     .skills/skill-creator/scripts/validate-skill.sh $NAME"
+echo "     skills/skill-creator/scripts/validate-skill.sh $NAME"
