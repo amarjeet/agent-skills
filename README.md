@@ -10,11 +10,16 @@ agent-skills/
 │   ├── skill-creator/
 │   ├── glyph-canvas/
 │   └── ...
+├── .agents/skills  ->  ../skills    symlink (cross-client convention)
 ├── .cursor/skills  ->  ../skills    symlink (Cursor discovery)
-└── .claude/skills  ->  ../skills    symlink (Claude discovery)
+└── .claude/skills  ->  ../skills    symlink (Claude Code discovery)
 ```
 
 The symlinks let multiple agent platforms discover the same skill set from a single source of truth. Always create and edit skills under `skills/`; never write into the symlinked paths.
+
+`.agents/skills/` is the emerging cross-client convention — a client that scans it picks up skills installed by any other compliant client, and vice versa. Published packages already ship skills there (Typer and FastAPI both include `.agents/skills/<name>/SKILL.md`), so it is the path that makes this repo portable beyond Claude Code and Cursor.
+
+Skills do not nest. A skill is exactly `skills/<name>/SKILL.md`, one level deep; a `SKILL.md` buried deeper is invisible to every harness's discovery. `validate-skill.sh` fails on one.
 
 ## How agents use these skills
 
@@ -28,6 +33,10 @@ description: "What the skill does. Triggers: phrase one, phrase two, phrase thre
 ```
 
 The `description` field — especially the `Triggers:` list — is what the agent matches user requests against. When a request fits, the agent reads the full `SKILL.md` and follows its instructions.
+
+**Stay inside the portable frontmatter fields.** The Agent Skills spec allows six: `name`, `description`, `license`, `compatibility`, `metadata`, and `allowed-tools`. Everything else (`when_to_use`, `argument-hint`, `arguments`, `model`, `effort`, `context`, `agent`, `background`, `hooks`, `paths`, `shell`, `disable-model-invocation`, `user-invocable`, `disallowed-tools`) is Claude Code-only, and packaging or uploading a skill that carries one fails with a hard error rather than ignoring it. Keep trigger phrases inside `description` rather than splitting them into `when_to_use`, and these skills stay loadable everywhere.
+
+`description` is capped at 1,536 characters.
 
 ## Available skills
 
@@ -70,7 +79,9 @@ Strict mode fails on missing trigger phrases, leftover TODO placeholders in the 
 ## Conventions
 
 - **Directory name must equal the frontmatter `name`** — the validator enforces this.
-- **Skills live in `skills/`, never in `.cursor/skills/` or `.claude/skills/`** — those are symlinks.
+- **Skills live in `skills/`, never in `.agents/skills/`, `.cursor/skills/` or `.claude/skills/`** — those are symlinks.
+- **Skills never nest** — one level only; `skills/<name>/SKILL.md`.
+- **Frontmatter stays within the six portable spec fields** — see above.
 - **Keep SKILL.md under ~500 lines** — move bulk content to `references/` files loaded on demand.
 - **Scripts are stdlib-only when possible** — avoids requiring users to install dependencies.
 - **One topic per reference file** — no nested `references/` directories.

@@ -92,8 +92,10 @@ if echo "$DESCRIPTION" | grep -qi 'TODO'; then
   die "Description is still a TODO placeholder"
 fi
 
+# The Agent Skills spec caps description (combined with when_to_use, which we
+# do not use for portability) at 1536 characters.
 DESC_LEN=${#DESCRIPTION}
-[[ "$DESC_LEN" -le 1024 ]] || die "Description is too long ($DESC_LEN chars, max 1024)"
+[[ "$DESC_LEN" -le 1536 ]] || die "Description is too long ($DESC_LEN chars, max 1536)"
 
 if ! echo "$DESCRIPTION" | grep -qi 'trigger'; then
   if [[ "$STRICT" -eq 1 ]]; then
@@ -117,6 +119,15 @@ if echo "$BODY" | grep -qE '^[[:space:]]*TODO[: -]'; then
   else
     warn "SKILL.md body still contains TODO placeholders"
   fi
+fi
+
+# Skills do not nest: a skill is exactly <skills-root>/<name>/SKILL.md. A
+# SKILL.md deeper inside the tree is invisible to every harness's discovery and
+# usually leftover scaffolding, so fail rather than let it rot.
+NESTED=$(find "$SKILL_DIR" -mindepth 2 -name SKILL.md -print 2>/dev/null || true)
+if [[ -n "$NESTED" ]]; then
+  die "Nested SKILL.md found under $SKILL_DIR (skills cannot nest; move it to the skills root or delete it):
+$(echo "$NESTED" | sed 's/^/    /')"
 fi
 
 if [[ -d "$SKILL_DIR/scripts" ]]; then
