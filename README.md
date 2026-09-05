@@ -59,6 +59,10 @@ Storage layout for model-serving and training experiments on an NVIDIA DGX Spark
 
 The workspace root is configurable via `DGX_SPARK_ROOT` (default `~/dgx-spark`); the tool cache locations are fixed by the tools themselves and should not be changed.
 
+### [dgx-spark-training-layout](skills/dgx-spark-training-layout/)
+
+Companion to `dgx-spark-layout` for fine-tuning work (LoRA, QLoRA, SFT). Adds the two things training introduces on top of serving: a run dimension in output paths, and the opposite retention economics of checkpoints (big, disposable) versus adapters (small, the actual product). Covers the experiment skeleton, the per-run output layout, and the `YYYYMMDD-HHMM-<tag>` run-id convention that makes an output directory read as its own sweep history. Triggers on phrases like "new training run", "fine-tune a model", "LoRA", "where do checkpoints go".
+
 A small `dad-jokes` demo skill also exists under `skills/dad-jokes/` as a minimal scaffolding example.
 
 ## Creating a new skill
