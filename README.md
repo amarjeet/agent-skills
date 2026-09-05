@@ -53,6 +53,12 @@ Render user requests as text drawings or diagrams using only unicode glyphs (box
 
 - `scripts/glyph.py` — CLI + importable helpers for width measurement (emoji- and CJK-aware), canvas validation (`check`, `fit`, `inspect`, `annotate`), padding, box junctions in five styles, shading primitives (`shade`, `hbar`, `vbar`, `sparkline`), and width-aware layout (`wrap`, `center`, `truncate`, `table`). Run `python3 skills/glyph-canvas/scripts/glyph.py --help` for the full subcommand list.
 
+### [dgx-spark-layout](skills/dgx-spark-layout/)
+
+Storage layout for model-serving and training experiments on an NVIDIA DGX Spark (or any single-node CUDA host). Keeps model weights and compiler caches pinned to each tool's own standard default location instead of duplicating them per experiment — the failure mode being a dir-local `./.cache` that silently re-downloads 60–80 GB checkpoints once per experiment. Covers both the Docker path (bind-mount to the in-container default) and the native path (export the env var the tool actually reads), with a verified table of cache variables for Hugging Face, vLLM, flashinfer, triton, tilelang and llama.cpp. Triggers on phrases like "new experiment", "where should the model download go", "HF_HOME", "duplicated model downloads".
+
+The workspace root is configurable via `DGX_SPARK_ROOT` (default `~/dgx-spark`); the tool cache locations are fixed by the tools themselves and should not be changed.
+
 A small `dad-jokes` demo skill also exists under `skills/dad-jokes/` as a minimal scaffolding example.
 
 ## Creating a new skill
