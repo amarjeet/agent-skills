@@ -1,6 +1,7 @@
 ---
 name: skill-creator
 description: "End-to-end system for creating, updating, and validating agent skills (Cursor, Claude, Codex, Grok). Triggers: create a skill, make a skill, new skill, update skill, skill format, skill spec, best practices for skills, skill engineering, how to build a skill."
+license: MIT
 ---
 
 # Skill Creator

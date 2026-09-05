@@ -91,3 +91,12 @@ Strict mode fails on missing trigger phrases, leftover TODO placeholders in the 
 - **Keep SKILL.md under ~500 lines** — move bulk content to `references/` files loaded on demand.
 - **Scripts are stdlib-only when possible** — avoids requiring users to install dependencies.
 - **One topic per reference file** — no nested `references/` directories.
+
+## License
+
+[MIT](LICENSE). Copy, modify, redistribute, or sell these skills freely; the only
+condition is that the copyright notice travels with substantial copies.
+
+Each `SKILL.md` also carries `license: MIT` in its frontmatter, so a skill stays
+licensed when it is lifted out of this repo on its own. `license` is one of the
+six portable Agent Skills spec fields, so this survives packaging and upload.

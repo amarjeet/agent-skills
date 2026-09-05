@@ -71,6 +71,7 @@ if [[ "$PROFILE" == "minimal" ]]; then
 ---
 name: $NAME
 description: "TODO - One sentence on what this skill does. Triggers: phrase one, phrase two."
+license: MIT
 ---
 
 # $TITLE
@@ -88,6 +89,7 @@ else
 ---
 name: $NAME
 description: "TODO - Describe what this skill does and when to use it. Triggers: phrase one, phrase two, phrase three."
+license: MIT
 ---
 
 # $TITLE

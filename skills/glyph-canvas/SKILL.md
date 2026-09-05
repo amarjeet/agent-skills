@@ -1,6 +1,7 @@
 ---
 name: glyph-canvas
 description: "Render user requests as text drawings or diagrams using only unicode glyphs (box drawing, block elements, arrows, geometric shapes). Triggers: draw with unicode, glyph art, unicode diagram, text diagram, draw a box, draw a chart in text, ascii-style diagram, draw a flowchart in text."
+license: MIT
 ---
 
 # Glyph Canvas

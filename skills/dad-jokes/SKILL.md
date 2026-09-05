@@ -1,6 +1,7 @@
 ---
 name: dad-jokes
 description: "Tell a single dad joke on request. Triggers: tell me a dad joke, dad joke, give me a pun, corny joke, joke please, make me groan."
+license: MIT
 ---
 
 # Dad Jokes

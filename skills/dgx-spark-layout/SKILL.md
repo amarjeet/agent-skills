@@ -2,6 +2,7 @@
 name: dgx-spark-layout
 description: "Keep model weights and compiler caches out of individual experiment directories on a DGX Spark (or any single-node CUDA host) by pinning them to each tool's own standard default location. Triggers: new experiment, model server, dgx spark layout, where should the model download go, HF_HOME, hugging face cache, vllm cache, llama.cpp cache, triton cache, duplicated model downloads, disk full from model weights, bind mount cache into container."
 compatibility: "Linux host with bash. Written for an NVIDIA DGX Spark (GB10, aarch64) but the storage rules apply to any single-node CUDA machine running vLLM, SGLang, llama.cpp or Hugging Face tooling. Docker is optional; both containerized and native workflows are covered."
+license: MIT
 ---
 
 # DGX Spark experiment storage layout
