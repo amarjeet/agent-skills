@@ -63,6 +63,16 @@ The workspace root is configurable via `DGX_SPARK_ROOT` (default `~/dgx-spark`);
 
 Companion to `dgx-spark-layout` for fine-tuning work (LoRA, QLoRA, SFT). Adds the two things training introduces on top of serving: a run dimension in output paths, and the opposite retention economics of checkpoints (big, disposable) versus adapters (small, the actual product). Covers the experiment skeleton, the per-run output layout, and the `YYYYMMDD-HHMM-<tag>` run-id convention that makes an output directory read as its own sweep history. Triggers on phrases like "new training run", "fine-tune a model", "LoRA", "where do checkpoints go".
 
+### [ste-writing](skills/ste-writing/)
+
+Write, rewrite, or review prose in ASD-STE100-style Simplified Technical English: max 20 words per sentence, one word one meaning, same term every time, active voice, one idea per sentence, simple words. Triggers on phrases like "use ste", "rewrite in ste", "simplified technical english", "ste review". Takes a target and a mode:
+
+- **Where:** `reply` (default), `session` (until `ste off`), a file path or glob, or pasted text
+- **How:** `write`, `rewrite` (keeps meaning; edits prose only, never code or identifiers), or `review` (lists violations without editing)
+- Free-text context such as "for on-call runbooks" sets audience and terms
+
+Example: `/ste-writing rewrite docs/**/*.md for on-call runbooks`
+
 A small `dad-jokes` demo skill also exists under `skills/dad-jokes/` as a minimal scaffolding example.
 
 ## Creating a new skill
