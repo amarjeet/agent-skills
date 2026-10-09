@@ -73,6 +73,13 @@ Write, rewrite, or review prose in ASD-STE100-style Simplified Technical English
 
 Example: `/ste-writing rewrite docs/**/*.md for on-call runbooks`
 
+### [story-loop](skills/story-loop/)
+
+Story-driven implementation for a repository: a YAML story tracker (`stories/tracker.yaml`) cut from a design document and optional formal specs (Quint parsed natively, anything else through a hand-written manifest), a coordinator session that spawns an implementer agent and an independent verifier agent per story, every step written to disk so a fresh session resumes from the tracker, the saved review reports and git alone, and one commit per story proposed to the owner and never made without a go-ahead. `init` installs the process files into a project (tracker, template, README, agent briefs, Claude Code agent files, optional local-only exclusions); `next`, `<id>`, `status` and `add` run the loop. Triggers on phrases like "story loop", "next story", "story status", "tracker.yaml", "set up the story process". Ships two scripts:
+
+- `scripts/init-stories.sh --target <repo> [--epic KEY] [--specs quint|manifest|none] [--local-only] [--alias story]` — scaffold the methodology; never overwrites, `--dry-run` shows the plan
+- `scripts/coverage.py` — validates the tracker and its spec references, renders `stories/coverage.md`, answers `status`, `next`, `show <id>` and `models <id>`, and edits `status`, `commit`, `ticket` and `log` lines in place (needs PyYAML). `init` copies it into the project as `stories/coverage.py`, so a project keeps working without the skill installed.
+
 A small `dad-jokes` demo skill also exists under `skills/dad-jokes/` as a minimal scaffolding example.
 
 ## Creating a new skill

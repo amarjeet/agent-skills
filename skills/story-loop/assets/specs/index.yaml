@@ -1,0 +1,11 @@
+# Spec manifest, read by stories/coverage.py when project.specs.kind is `manifest`.
+# Use it for spec languages the script cannot parse (TLA+, Alloy, Gherkin, prose invariants):
+# list, per module, the actions a story can implement, the properties it must keep true and the
+# witness runs (scenarios) it reproduces as tests under the same names.
+modules: {}
+# modules:
+#   publish:
+#     file: specs/publish.tla
+#     actions: [Receive, Commit, Ack]
+#     properties: [AckedIsCommitted]
+#     witness_runs: [RetryIsIdempotent]

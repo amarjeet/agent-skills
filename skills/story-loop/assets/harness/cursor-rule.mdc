@@ -1,0 +1,11 @@
+---
+description: story-loop process for this repository; read before touching stories/tracker.yaml or implementing a story
+alwaysApply: false
+globs: stories/**
+---
+
+Follow `stories/README.md`. The chat session that runs the loop is the coordinator and the only
+writer of `status`, `commit`, `ticket` and `log` in `stories/tracker.yaml`. Implementer and
+verifier work runs from the briefs in `stories/agents/`, each in a fresh context, and their
+reports are saved verbatim under `stories/reviews/`. Never commit or push without an explicit
+instruction; never stage local-only process material; one commit per story on `{{BRANCH}}`.

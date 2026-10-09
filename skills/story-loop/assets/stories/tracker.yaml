@@ -1,0 +1,78 @@
+# Story tracker for {{PROJECT_NAME}}.
+#
+# One entry per story. The coordinator (a person or the coordinating agent session) is the
+# only writer of `status`, `commit`, `ticket` and `log`; implementer and verifier agents never
+# edit this file. `python3 stories/coverage.py` validates it and renders stories/coverage.md.
+# Fields and rules: stories/TEMPLATE.md. Process: stories/README.md.
+
+version: 2
+
+project:
+  name: {{PROJECT_NAME}}
+  # The design document(s); a story names their sections in its `design` field.
+  design: [{{DESIGN}}]
+  specs:
+    # quint | manifest | none
+    kind: {{SPECS_KIND}}
+    dir: {{SPECS_DIR}}
+    # The local spec gate; run only for spec-mapped or spec-touching stories.
+    gate: {{SPECS_GATE}}
+    # Spec definitions that are plumbing, not behaviour; they never need a story.
+    ignore:
+      actions: [init, step]
+      properties: []
+      witness_runs: []
+  # Every story is committed here, one commit per story, on the owner's go-ahead.
+  branch: {{BRANCH}}
+  ticket:
+    # jira | github | linear | none
+    system: {{TICKET_SYSTEM}}
+    project: {{TICKET_PROJECT}}
+    # Every story that changes committed code gets a ticket under this epic before it starts.
+    epic: {{EPIC}}
+  commit:
+    # `Refs: <ticket>` footer; the subject carries no ticket key.
+    footer: Refs
+  build:
+    full: "{{BUILD_FULL}}"
+    scoped: "{{BUILD_SCOPED}}"
+  # true: stories/, the design, the specs and the agent files are never committed.
+  local_only: {{LOCAL_ONLY}}
+  # Verifier FAILs before the story is blocked for a human.
+  max_rounds: 3
+
+# Who runs what. Resolution per story, most specific first:
+#   story.models.<role>  >  models.phases.<phase>.<role>  >  models.default.<role>
+# Values must be listed in `allowed` (the names the harness's agent tool accepts). The
+# coordinator passes the resolved model when it spawns an agent. `coordinator` names the model
+# the loop session itself should run on.
+models:
+  allowed: [opus, sonnet, haiku, fable]
+  default:
+    coordinator: opus
+    implementer: opus
+    verifier: opus
+  phases: {}
+  # phases:
+  #   2: { implementer: sonnet }
+
+stories: []
+
+# First story, as an example. Replace `stories: []` above with this block (uncommented):
+#
+#  - id: S0-01
+#    title: Build skeleton and CI gate
+#    ticket:                     # the coordinator records the key once the owner approves the draft
+#    phase: 0
+#    status: todo
+#    depends_on: []
+#    design:
+#      - "Repository and module structure"
+#    summary: >
+#      What exists when the story is done, in terms of behaviour and modules. Precise enough
+#      that an agent needs no other brief; short enough to read twice.
+#    spec: { modules: [], actions: [], properties: [], witness_runs: [], note: No behaviour. }
+#    acceptance:
+#      - {{BUILD_FULL}}
+#    carry: []
+#    log: []
