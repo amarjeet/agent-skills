@@ -80,6 +80,10 @@ Story-driven implementation for a repository: a YAML story tracker (`stories/tra
 - `scripts/init-stories.sh --target <repo> [--epic KEY] [--specs quint|manifest|none] [--local-only] [--alias story]` — scaffold the methodology; never overwrites, `--dry-run` shows the plan
 - `scripts/coverage.py` — validates the tracker and its spec references, renders `stories/coverage.md`, answers `status`, `next`, `show <id>` and `models <id>`, and edits `status`, `commit`, `ticket` and `log` lines in place (needs PyYAML). `init` copies it into the project as `stories/coverage.py`, so a project keeps working without the skill installed.
 
+### [firecrawl](skills/firecrawl/)
+
+Wraps the locally installed `firecrawl` CLI for web work: `search`, `scrape`, `crawl`, `map`, `parse` (local PDF/DOCX/XLSX/HTML), `monitor`, `interact` (stateful browser follow-ups), plus `agent` and schema-driven extraction. Triggers on phrases like "search the web", "scrape this URL", "crawl these docs", "parse this file", "use firecrawl". Requires an authenticated CLI (`firecrawl login` or `FIRECRAWL_API_KEY`); the skill tells the agent to say so rather than invent credentials, to reuse cached output before spending credits, and to write bulky output to `.firecrawl/` (git-ignored) instead of dumping it into the chat. Ships with `references/cli-command-reference.md` for full command and flag detail.
+
 A small `dad-jokes` demo skill also exists under `skills/dad-jokes/` as a minimal scaffolding example.
 
 ## Creating a new skill

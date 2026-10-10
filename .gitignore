@@ -522,3 +522,10 @@ docker-compose.override.yml
 *.rpm
 *.apk
 *.snap
+
+# =============================================================================
+# Agent working data (per-run scratch output, not part of the skill set)
+# =============================================================================
+
+# Firecrawl CLI search/scrape output written by skills that default to it
+.firecrawl/
